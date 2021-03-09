@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Formulario } from './components/Formulario';
+import { Header } from './components/Header';
+import { Noticias } from './components/Noticias';
 
 function App() {
+
+  const [ categoria, setCategoria ] = useState('');
+  const [ noticias, setNoticias ] = useState([]);
+
+  useEffect(() => {
+    const consultarAPI = async () => {
+      const apiKey = process.env.REACT_APP_APIKEY_NEWS;
+      const url = `http://newsapi.org/v2/top-headlines?country=ar&category=${categoria}&apiKey=${apiKey}`;
+      const respuesta = await fetch(url);
+      const noticias = await respuesta.json();
+      setNoticias(noticias.articles);
+    };
+    consultarAPI();
+  }, [categoria])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header titulo="Buscador de Noticias" />
+
+      <div className="container white"> 
+        <Formulario 
+          setCaragoria={setCategoria}
+        />
+
+        <Noticias 
+          noticias={noticias}
+        />
+      </div>
+    </>
   );
-}
+};
 
 export default App;
