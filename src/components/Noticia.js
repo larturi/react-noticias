@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 
 import PropTypes from 'prop-types';
@@ -8,8 +9,8 @@ export const Noticia = ({ noticia }) => {
     const { urlToImage, url, title, description, source } = noticia;
 
     return (
-        <div className="col s12">
-            <div className="card horizontal">
+        <div className="col s12 m6 l6 xl4">
+            <div className="card large">
                 <div className="card-image">
                     <img 
                         className={styles.imagen} 
@@ -22,7 +23,7 @@ export const Noticia = ({ noticia }) => {
                 <div className="card-stacked">
                     <div className="card-content">
                         <h5>{ title }</h5>
-                        <p>{ description }</p>
+                        {/* <p>{ description?.substring(0,50) }</p> */}
                     </div>
 
                     <div className="card-action">

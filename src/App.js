@@ -3,6 +3,8 @@ import { Formulario } from './components/Formulario';
 import { Header } from './components/Header';
 import { Noticias } from './components/Noticias';
 
+import './App.module.css'
+
 function App() {
 
   const [ categoria, setCategoria ] = useState('');
